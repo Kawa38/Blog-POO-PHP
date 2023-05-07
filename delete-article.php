@@ -1,6 +1,12 @@
 <?php
 require_once("libraries/database.php");
 require_once('libraries/utils.php');
+
+require_once("libraries/models/Article.php");
+ // instanciation des objets
+$model_article = new Article;
+
+
 /**
  * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
  * 
@@ -26,7 +32,7 @@ $id = $_GET['id'];
  */
    //Vérification que l'article existe bel et bien
     
-  $article = finTheArticle($id);
+  $article = findThe($id);
 
    if(!article) {
        die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
@@ -35,7 +41,7 @@ $id = $_GET['id'];
 
  // suppression article
 
- deleteTheArticle($id);
+ deleteThe($id);
 
 
  

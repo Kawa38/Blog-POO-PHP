@@ -3,11 +3,17 @@ require_once("libraries/database.php");
 require_once('libraries/utils.php');
 
 
-/**
- * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE ET REDIRIGER SUR L'ARTICLE !
- * 
+require_once("libraries/models/Article.php");
+require_once("libraries/models/Comment.php");
+ // instanciation des objets
+$model_article = new Article;
+$model_comment = new Comment;
 
-//  Vérification 
+
+
+// * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE ET REDIRIGER SUR L'ARTICLE !
+
+//Vérification 
         $author = null;
         if (!empty($_POST['author'])) {
             $author = $_POST['author'];
@@ -24,24 +30,23 @@ require_once('libraries/utils.php');
             $article_id = $_POST['article_id'];
         }
 
-            // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
+        // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
 
         if (!$author || !$article_id || !$content) {
             die("Votre formulaire a été mal rempli !");
         }
 
-/**
- * 2. Vérification que l'id de l'article pointe bien vers un article qui existe
+
+ // Vérification que l'id de l'article pointe bien vers un article qui existe
  
- */
-$article = finTheArticle($article_id);
+$article = $model_article->findThe($article_id);
 
 // Si rien n'est revenu, on fait une erreur
 if (!$article) {
     die("Ho ! L'article $article_id n'existe pas boloss !");
 }
 
-saveComments($author,$content,$article_id);
+$model_comment->save($author,$content,$article_id);
 
 // 4. Redirection vers l'article en question :
 header('Location: article.php?id=' . $article_id);

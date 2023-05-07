@@ -1,13 +1,16 @@
 <?php
 require_once("libraries/database.php");
 require_once('libraries/utils.php');
+require_once("libraries/models/Article.php");
+require_once("libraries/models/Comment.php");
 /**
- * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
+ * CE FICHIER AFFICHE UN ARTICLE ET SES COMMENTAIRES ! */
+ // instanciation des objets
+$model_article = new Article;
+$model_comment = new Comment;
  
+//1. Récupération du param "id" et vérification de celui-ci
 
-/**
- * 1. Récupération du param "id" et vérification de celui-ci
- */
 // On part du principe qu'on ne possède pas de param "id"
 $article_id = null;
 
@@ -22,8 +25,8 @@ if (!$article_id) {
 }
 
 // récupérer les datas
-$article = finTheArticle($article_id);
-$commentaires = finCommentsOfTheArticle($article_id);
+$article =$model_article -> findThe($article_id);
+$commentaires = $model_comment -> findAllFromArticle($article_id);
 
 // afficher 
 $pageTitle = $article['title'];

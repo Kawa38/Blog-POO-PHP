@@ -6,7 +6,7 @@
 <hr>
 <?= $article['content'] ?>
 
-<?php///ANCHOR - Affichage des commentaires?>
+
 <?php if (count($commentaires) === 0) : ?>
     <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
 <?php else : ?>
@@ -21,7 +21,7 @@
     <?php endforeach ?>
 <?php endif ?>
 
-<?php //ANCHOR- Formulaire Ajout commentaire ?>
+
 <form action="save-comment.php" method="POST">
     <h3>Vous voulez réagir ? N'hésitez ! !</h3>
     <input type="text" name="author" placeholder="Votre pseudo !">
