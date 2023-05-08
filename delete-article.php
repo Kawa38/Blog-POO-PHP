@@ -1,10 +1,11 @@
 <?php
 require_once("libraries/database.php");
 require_once('libraries/utils.php');
-
 require_once("libraries/models/Article.php");
+
  // instanciation des objets
-$model_article = new Article;
+
+$model = new Article;
 
 
 /**
@@ -16,11 +17,16 @@ $model_article = new Article;
 /**
  * 1. On vérifie que le GET possède bien un paramètre "id" (delete.php?id=202) et que c'est bien un nombre
  */
+
+
+
 if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
     die("Ho ?! Tu n'as pas précisé l'id de l'article !");
 }
 
 $id = $_GET['id'];
+
+
 
 /**
  * 2. Connexion à la base de données avec PDO
@@ -32,7 +38,7 @@ $id = $_GET['id'];
  */
    //Vérification que l'article existe bel et bien
     
-  $article = findThe($id);
+  $article = $model->findThe($id);
 
    if(!article) {
        die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
@@ -41,7 +47,7 @@ $id = $_GET['id'];
 
  // suppression article
 
- deleteThe($id);
+ $model->deleteThe($id);
 
 
  

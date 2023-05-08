@@ -25,13 +25,7 @@ public function findAll() :array {
     
 }
 
-public function findThe(int $id){
-
-    /**
-     * 3. Récupération de l'article en question
-     * On va ici utiliser une requête préparée 
-        * - Le mode d'erreur : le mode exception permet à PDO de nous prévenir violament quand on fait une connerie ;-)
-        * - Le mode d'exploitation : FETCH_ASSOC veut dire qu'on exploitera les données sous la forme de tableaux associatifs*/
+public function findThe($id){
 
     $query = $this->pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
 

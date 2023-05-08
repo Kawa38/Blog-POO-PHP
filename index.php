@@ -9,8 +9,11 @@ require_once("libraries/models/Model.php");
 //instanciation de l'objet
 $model= new Article;
 
+
 //Récupération des articles 
 $articles = $model->findAll();
+
+
 
 //Affichage de la page d'acceuil  via une fonction gérant la mise en cache du template. Passer en paramètre tt les infos utile, ici sour la forme d'un tableau indexé
 
